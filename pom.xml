@@ -21,8 +21,7 @@
 	
 	<modules>
 		<module>demo-api</module>
-		<module>demo-transactional-remoting-backend</module>
-		
+		<module>demo-backend</module>
 		<module>demo-client</module>
 	</modules>
 
