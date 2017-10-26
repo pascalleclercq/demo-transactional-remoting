@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 
 import com.atomikos.demotransactionalremoting.api.AccountService;
-import com.atomikos.demotransactionalremoting.transactions.AtomikosTransactionService;
+import com.atomikos.transactionalremoting.api.AtomikosTransactionService;
+import com.atomikos.transactionalremoting.server.TransactionalHttpInvokerServiceExporter;
 
 @SpringBootApplication
 public class DemoTransactionalRemotingApplication {

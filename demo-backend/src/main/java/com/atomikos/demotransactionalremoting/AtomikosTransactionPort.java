@@ -1,6 +1,5 @@
 package com.atomikos.demotransactionalremoting;
 
-import com.atomikos.demotransactionalremoting.transactions.AtomikosTransactionService;
 import com.atomikos.icatch.HeurCommitException;
 import com.atomikos.icatch.HeurHazardException;
 import com.atomikos.icatch.HeurMixedException;
@@ -12,6 +11,7 @@ import com.atomikos.icatch.TransactionService;
 import com.atomikos.icatch.config.Configuration;
 import com.atomikos.logging.Logger;
 import com.atomikos.logging.LoggerFactory;
+import com.atomikos.transactionalremoting.api.AtomikosTransactionService;
 
 public class AtomikosTransactionPort implements AtomikosTransactionService {
 

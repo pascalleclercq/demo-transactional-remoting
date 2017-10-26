@@ -15,6 +15,7 @@ import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 import com.atomikos.demotransactionalremoting.api.Account;
 import com.atomikos.demotransactionalremoting.api.AccountService;
 import com.atomikos.icatch.jta.UserTransactionManager;
+import com.atomikos.transactionalremoting.client.TransactionalHttpInvokerRequestExecutor;
 
 @org.springframework.context.annotation.Configuration
 public class AccountClient {

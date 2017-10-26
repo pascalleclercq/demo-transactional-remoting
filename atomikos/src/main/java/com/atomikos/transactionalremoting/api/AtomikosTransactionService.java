@@ -1,4 +1,4 @@
-package com.atomikos.demotransactionalremoting.transactions;
+package com.atomikos.transactionalremoting.api;
 
 import com.atomikos.icatch.HeurCommitException;
 import com.atomikos.icatch.HeurHazardException;

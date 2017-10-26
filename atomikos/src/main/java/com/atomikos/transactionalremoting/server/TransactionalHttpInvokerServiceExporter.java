@@ -1,4 +1,4 @@
-package com.atomikos.demotransactionalremoting;
+package com.atomikos.transactionalremoting.server;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package com.atomikos.demotransactionalremoting.client;
+package com.atomikos.transactionalremoting.client;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

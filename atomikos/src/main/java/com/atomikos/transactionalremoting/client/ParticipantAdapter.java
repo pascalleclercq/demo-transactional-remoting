@@ -1,10 +1,9 @@
-package com.atomikos.demotransactionalremoting.client;
+package com.atomikos.transactionalremoting.client;
 
 import java.util.Map;
 
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 
-import com.atomikos.demotransactionalremoting.transactions.AtomikosTransactionService;
 import com.atomikos.icatch.HeurCommitException;
 import com.atomikos.icatch.HeurHazardException;
 import com.atomikos.icatch.HeurMixedException;
@@ -14,6 +13,7 @@ import com.atomikos.icatch.RollbackException;
 import com.atomikos.icatch.SysException;
 import com.atomikos.logging.Logger;
 import com.atomikos.logging.LoggerFactory;
+import com.atomikos.transactionalremoting.api.AtomikosTransactionService;
 
 public class ParticipantAdapter implements Participant {
 	private static final long serialVersionUID = 1L;
