@@ -19,6 +19,7 @@ import com.atomikos.icatch.imp.PropagationImp;
 import com.atomikos.icatch.jta.TransactionManagerImp;
 import com.atomikos.logging.Logger;
 import com.atomikos.logging.LoggerFactory;
+import com.atomikos.transactionalremoting.api.AtomikosTransactionService;
 
 public class TransactionalHttpInvokerServiceExporter extends
 		HttpInvokerServiceExporter {
@@ -30,9 +31,9 @@ public class TransactionalHttpInvokerServiceExporter extends
 			throws IOException {
 		LOGGER.logTrace("Filtering incoming request...");
 		
-		String transactionId = request.getHeader("Transaction-Id");
+		String transactionId = request.getHeader(AtomikosTransactionService.TRANSACTION_ID);
 		if (transactionId != null) {		
-			String expiry = request.getHeader("Transaction-Expiry");
+			String expiry = request.getHeader(AtomikosTransactionService.TRANSACTION_EXPIRY);
 			long timeout = Long.valueOf(expiry) - System.currentTimeMillis();
 			try {
 				importTransaction(transactionId, timeout);
@@ -70,7 +71,7 @@ public class TransactionalHttpInvokerServiceExporter extends
 	protected OutputStream decorateOutputStream(
 			HttpServletRequest request, HttpServletResponse response,
 			OutputStream os) throws IOException {
-		String transactionId = request.getHeader("Transaction-Id");
+		String transactionId = request.getHeader(AtomikosTransactionService.TRANSACTION_ID);
 		LOGGER.logTrace("Filtering outgoing response for remote transaction: " + transactionId);
 		if (transactionId != null) {
 			try {		
@@ -79,17 +80,13 @@ public class TransactionalHttpInvokerServiceExporter extends
 				String coordId;
 				
 				if(response.getStatus() >= 200 && response.getStatus() < 300) {
-					coordId = terminated(requestURI, false);
+					coordId = terminated(false);
 				} else {
-					coordId = terminated(requestURI, true);
+					coordId = terminated(true);
 				}
 				if (coordId != null) {
-//					Link atomikos = Link.fromUri(uriInfo.getBaseUriBuilder()
-//							.path(AtomikosRestPort.class).path(coordId).build()).rel("atomikos").build();
-					
-					response.addHeader("Atomikos-URI", requestURI+"/atomikos");
-					response.addHeader("Atomikos-CoordId", coordId);
-					//responseContext.getHeaders().add(HttpHeaders.LINK, atomikos.toString());
+					response.addHeader(AtomikosTransactionService.ATOMIKOS_URI, requestURI+"/atomikos");
+					response.addHeader(AtomikosTransactionService.ATOMIKOS_COORD_ID, coordId);
 				}
 				
 			} catch (RollbackException e) {
@@ -124,7 +121,7 @@ public class TransactionalHttpInvokerServiceExporter extends
 	    return url.toString();
 	}
 	
-	private String terminated(String uriInfo, boolean error) throws RollbackException {
+	private String terminated(boolean error) throws RollbackException {
 		
 		CompositeTransactionManager ctm = getCompostiteTransactionManager();
 		CompositeTransaction current = ctm.getCompositeTransaction();

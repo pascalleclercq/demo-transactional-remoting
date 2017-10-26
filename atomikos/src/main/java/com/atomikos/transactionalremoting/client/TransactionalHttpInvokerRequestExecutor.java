@@ -12,6 +12,7 @@ import com.atomikos.icatch.config.Configuration;
 import com.atomikos.icatch.jta.TransactionManagerImp;
 import com.atomikos.logging.Logger;
 import com.atomikos.logging.LoggerFactory;
+import com.atomikos.transactionalremoting.api.AtomikosTransactionService;
 
 public class TransactionalHttpInvokerRequestExecutor extends
 		SimpleHttpInvokerRequestExecutor {
@@ -41,9 +42,9 @@ public class TransactionalHttpInvokerRequestExecutor extends
 		CompositeTransaction ct = getTransaction();
 
 		if (isJta(ct)) {
-			con.setRequestProperty("Transaction-Id", ct
+			con.setRequestProperty(AtomikosTransactionService.TRANSACTION_ID, ct
 					.getCompositeCoordinator().getCoordinatorId());
-			con.setRequestProperty("Transaction-Expiry", String.valueOf(System
+			con.setRequestProperty(AtomikosTransactionService.TRANSACTION_EXPIRY, String.valueOf(System
 					.currentTimeMillis() + ct.getTimeout()));
 		} else {
 			LOGGER.logDebug("No transaction bound to thread while calling rest service - request will not be transactional!");
@@ -61,8 +62,8 @@ public class TransactionalHttpInvokerRequestExecutor extends
 		LOGGER.logTrace("Filtering response...");
 
 		CompositeTransaction ct = getTransaction();
-		String uri = con.getHeaderField("Atomikos-URI");
-		String coordId = con.getHeaderField("Atomikos-CoordId");
+		String uri = con.getHeaderField(AtomikosTransactionService.ATOMIKOS_URI);
+		String coordId = con.getHeaderField(AtomikosTransactionService.ATOMIKOS_COORD_ID);
 		if (isJta(ct)) {
 			if (uri != null && coordId != null) {
 				ct.addParticipant(new ParticipantAdapter(uri, coordId));

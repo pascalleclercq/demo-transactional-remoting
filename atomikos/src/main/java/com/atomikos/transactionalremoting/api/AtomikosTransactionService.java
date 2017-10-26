@@ -9,7 +9,12 @@ import com.atomikos.icatch.SysException;
 
 public interface AtomikosTransactionService {
 
-     int prepare(String coordId)
+     public static final String TRANSACTION_ID = "Transaction-Id";
+	public static final String TRANSACTION_EXPIRY = "Transaction-Expiry";
+	public static final String ATOMIKOS_COORD_ID = "Atomikos-CoordId";
+	public static final String ATOMIKOS_URI = "Atomikos-URI";
+
+	int prepare(String coordId)
         throws RollbackException,
 	     HeurHazardException,
 	     HeurMixedException,
