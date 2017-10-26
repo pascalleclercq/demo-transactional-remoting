@@ -6,11 +6,8 @@
 		<artifactId>demo-transactional-remoting</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.atomikos</groupId>
 	<artifactId>demo-client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -25,6 +22,20 @@
 			<groupId>com.atomikos</groupId>
 			<artifactId>demo-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.atomikos</groupId>
+			<artifactId>transactions-jta</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.atomikos</groupId>
+			<artifactId>transactions</artifactId>
+			<version>${atomikos.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jta_1.0.1B_spec</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 </project>
