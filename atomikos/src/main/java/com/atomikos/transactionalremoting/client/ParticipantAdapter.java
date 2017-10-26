@@ -50,7 +50,7 @@ public class ParticipantAdapter implements Participant {
 	@Override
 	public int prepare() throws RollbackException, HeurHazardException,
 			HeurMixedException, SysException {
-		LOGGER.logDebug("Calling prepare on " + getURI());
+		LOGGER.logDebug("Calling prepare on " + getURI() +"+("+coordId+")");
 		return remoteParticipant.prepare(coordId);
 	}
 
