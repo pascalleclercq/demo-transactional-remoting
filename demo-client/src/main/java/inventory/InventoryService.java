@@ -1,4 +1,4 @@
-package com.atomikos.democlient2;
+package inventory;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +10,15 @@ import payment.PaymentService;
 
 @Service
 @Transactional
-public class CustomerService {
+public class InventoryService {
 
 	@Autowired
-	CustomerRepository repository;
+	StockRepository repository;
 	@Autowired
 	PaymentService accountService;
 	
-	public void createUserAndAccount() throws Exception {
-		repository.save(new Customer("Jack", "Bauer"));
-		accountService.pay(new Payment("Jack Bauer", 50)); //remote service
+	public void createUserAndAccount(Long itemId, Float qty, String cardno) throws Exception {
+		repository.save(new Stock(itemId, qty));
+		accountService.pay(new Payment(cardno, 50)); //remote service
 	}
 }

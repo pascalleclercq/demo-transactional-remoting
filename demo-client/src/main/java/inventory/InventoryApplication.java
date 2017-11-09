@@ -1,4 +1,4 @@
-package com.atomikos.democlient2;
+package inventory;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,16 +11,16 @@ import payment.PaymentService;
 import com.atomikos.http.spring.httpinvoker.TransactionalHttpInvokerRequestExecutor;
 
 @SpringBootApplication
-public class DemoClientApplication {
+public class InventoryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoClientApplication.class, args);
+		SpringApplication.run(InventoryApplication.class, args);
 	}
 	
 	@Bean
-	public PaymentService accountService() {
+	public PaymentService paymentService() {
 		HttpInvokerProxyFactoryBean invoker = new HttpInvokerProxyFactoryBean();
-		invoker.setServiceUrl("http://localhost:8081/account");
+		invoker.setServiceUrl("http://localhost:8081/payment");
 		invoker.setServiceInterface(PaymentService.class);
 		invoker.setHttpInvokerRequestExecutor(new TransactionalHttpInvokerRequestExecutor());
 		invoker.afterPropertiesSet();
@@ -28,14 +28,13 @@ public class DemoClientApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(CustomerService customerService) {
+	public CommandLineRunner demo(InventoryService customerService) {
 		
 		return new CommandLineRunner() {
 			
 			@Override
 			public void run(String... args) throws Exception {
-				customerService.createUserAndAccount();
-				
+				customerService.createUserAndAccount(20l,2f,"card10");
 			}
 		}; 
 		
