@@ -21,18 +21,11 @@
 	</properties>
 	
 	<modules>
-		<module>demo-api</module>
-		<module>demo-backend</module>
-		<module>demo-client</module>
+		<module>payment-api</module>
+		<module>payment-app</module>
+		<module>inventory-app</module>
 	</modules>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+	
 
 </project>

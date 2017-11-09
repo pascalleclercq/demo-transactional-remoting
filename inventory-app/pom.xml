@@ -6,7 +6,7 @@
 		<artifactId>demo-transactional-remoting</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>demo-client</artifactId>
+	<artifactId>inventory-app</artifactId>
 	<dependencies>
 
 		<dependency>
@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.atomikos</groupId>
-			<artifactId>demo-api</artifactId>
+			<artifactId>payment-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -38,4 +38,13 @@
 			<version>4.0.63-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

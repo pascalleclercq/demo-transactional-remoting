@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>demo-backend</artifactId>
+	<artifactId>payment-app</artifactId>
 	<packaging>jar</packaging>
 
 	<name>demo-transactional-remoting</name>
@@ -40,7 +40,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.atomikos</groupId>
-			<artifactId>demo-api</artifactId>
+			<artifactId>payment-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -55,6 +55,13 @@
 		</dependency>
 	</dependencies>
 
-
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
