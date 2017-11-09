@@ -10,9 +10,9 @@ public class Stock {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long itemId;
+	public String itemId;
 
-	public Float amount;
+	public int amount;
 
 	public Float unitPrice;
 	
@@ -22,7 +22,7 @@ public class Stock {
 	
 	
 
-	public Stock(Long itemId, Float amount) {
+	public Stock(String itemId, int amount) {
 		super();
 		this.itemId = itemId;
 		this.amount = amount;
@@ -30,28 +30,41 @@ public class Stock {
 
 
 
-	public Long getItemId() {
+	public String getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(Long itemId) {
+
+
+	public void setItemId(String itemId) {
 		this.itemId = itemId;
 	}
 
-	public Float getAmount() {
+
+
+	public int getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Float amount) {
+
+
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
+
 
 	public Float getUnitPrice() {
 		return unitPrice;
 	}
 
+
+
 	public void setUnitPrice(Float unitPrice) {
 		this.unitPrice = unitPrice;
 	}
+
+
+
 
 }

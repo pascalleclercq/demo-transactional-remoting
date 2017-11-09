@@ -1,14 +1,14 @@
 package inventory;
 
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
+import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 
-import payment.PaymentService;
-
-import com.atomikos.http.spring.httpinvoker.TransactionalHttpInvokerRequestExecutor;
+import com.atomikos.http.spring.httpinvoker.AtomikosHttpPort;
+import com.atomikos.http.spring.httpinvoker.AtomikosTransactionPort;
+import com.atomikos.http.spring.httpinvoker.TransactionalHttpInvokerServiceExporter;
 
 @SpringBootApplication
 public class InventoryApplication {
@@ -16,30 +16,24 @@ public class InventoryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InventoryApplication.class, args);
 	}
-	
-	@Bean
-	public PaymentService paymentService() {
-		HttpInvokerProxyFactoryBean invoker = new HttpInvokerProxyFactoryBean();
-		invoker.setServiceUrl("http://localhost:8081/payment");
-		invoker.setServiceInterface(PaymentService.class);
-		invoker.setHttpInvokerRequestExecutor(new TransactionalHttpInvokerRequestExecutor());
-		invoker.afterPropertiesSet();
-		return (PaymentService)invoker.getObject();
+
+	@Autowired
+	InventoryService inventoryService;
+
+	@Bean(name = "/inventory")
+	HttpInvokerServiceExporter paymentServiceServiceExporter() {
+		HttpInvokerServiceExporter exporter = new TransactionalHttpInvokerServiceExporter();
+		exporter.setService(inventoryService);
+		exporter.setServiceInterface(InventoryService.class);
+		return exporter;
 	}
-	
-	@Bean
-	public CommandLineRunner demo(InventoryService customerService) {
-		
-		return new CommandLineRunner() {
-			
-			@Override
-			public void run(String... args) throws Exception {
-				customerService.createUserAndAccount(20l,2f,"card10");
-			}
-		}; 
-		
-			
+
+	@Bean(name = AtomikosHttpPort.ATOMIKOS_PORT_SERVICE_NAME)
+	HttpInvokerServiceExporter atomikosServiceServiceExporter() {
+		HttpInvokerServiceExporter exporter = new HttpInvokerServiceExporter();
+		exporter.setService(new AtomikosTransactionPort());
+		exporter.setServiceInterface(AtomikosHttpPort.class);
+		return exporter;
 	}
- 	
 
 }

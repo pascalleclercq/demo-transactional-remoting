@@ -21,8 +21,9 @@ public class PaymentApplication {
 	
 	@Autowired
 	PaymentService paymentService;
+	
 	@Bean(name = "/payment") 
-	HttpInvokerServiceExporter accountServiceServiceExporter() {
+	HttpInvokerServiceExporter paymentServiceServiceExporter() {
         HttpInvokerServiceExporter exporter = new TransactionalHttpInvokerServiceExporter();
         exporter.setService( paymentService );
         exporter.setServiceInterface( PaymentService.class );
