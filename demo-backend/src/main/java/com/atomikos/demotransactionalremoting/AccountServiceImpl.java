@@ -5,8 +5,8 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atomikos.demotransactionalremoting.api.Account;
-import com.atomikos.demotransactionalremoting.api.AccountService;
+import account.Account;
+import account.AccountService;
 @Service
 public class AccountServiceImpl implements AccountService {
 	@Autowired

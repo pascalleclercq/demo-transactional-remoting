@@ -1,5 +1,6 @@
 package com.atomikos.demotransactionalremoting;
 
+import com.atomikos.http.spring.httpinvoker.AtomikosHttpPort;
 import com.atomikos.icatch.HeurCommitException;
 import com.atomikos.icatch.HeurHazardException;
 import com.atomikos.icatch.HeurMixedException;
@@ -11,12 +12,10 @@ import com.atomikos.icatch.TransactionService;
 import com.atomikos.icatch.config.Configuration;
 import com.atomikos.logging.Logger;
 import com.atomikos.logging.LoggerFactory;
-import com.atomikos.transactionalremoting.api.AtomikosTransactionService;
 
-public class AtomikosTransactionPort implements AtomikosTransactionService {
+public class AtomikosTransactionPort implements AtomikosHttpPort {
 
-	private static final Logger LOGGER = LoggerFactory
-			.createLogger(AtomikosTransactionPort.class);
+	private static final Logger LOGGER = LoggerFactory.createLogger(AtomikosTransactionPort.class);
 
 	@Override
 	public int prepare(String coordId) throws RollbackException,
@@ -58,7 +57,6 @@ public class AtomikosTransactionPort implements AtomikosTransactionService {
 		TransactionService service_ = Configuration.getTransactionService();
 		Participant part = service_.getParticipant(coordId);
 		if (part != null) {
-
 			part.rollback();
 		}
 

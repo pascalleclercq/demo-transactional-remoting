@@ -6,9 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 
-import com.atomikos.demotransactionalremoting.api.AccountService;
-import com.atomikos.transactionalremoting.api.AtomikosTransactionService;
-import com.atomikos.transactionalremoting.server.TransactionalHttpInvokerServiceExporter;
+import account.AccountService;
+
+import com.atomikos.http.spring.httpinvoker.AtomikosHttpPort;
+import com.atomikos.http.spring.httpinvoker.TransactionalHttpInvokerServiceExporter;
 
 @SpringBootApplication
 public class DemoTransactionalRemotingApplication {
@@ -27,11 +28,11 @@ public class DemoTransactionalRemotingApplication {
         return exporter;
     }
 	
-	@Bean(name = "/atomikos") 
+	@Bean(name = AtomikosHttpPort.ATOMIKOS_PORT_SERVICE_NAME) 
 	HttpInvokerServiceExporter atomikosServiceServiceExporter() {
         HttpInvokerServiceExporter exporter = new HttpInvokerServiceExporter();
         exporter.setService( new AtomikosTransactionPort() );
-        exporter.setServiceInterface( AtomikosTransactionService.class );
+        exporter.setServiceInterface( AtomikosHttpPort.class );
         return exporter;
     }
 }

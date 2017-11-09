@@ -1,2 +1,8 @@
 /.project
 /.settings/
+/admin-serv.net.csr
+/admin-serv.net.deprotected.key
+/admin-serv.net.key
+/ca.crt
+/ca.key
+/ca.srl

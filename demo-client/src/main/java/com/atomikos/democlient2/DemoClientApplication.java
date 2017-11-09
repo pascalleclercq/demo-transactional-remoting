@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 
-import com.atomikos.demotransactionalremoting.api.AccountService;
-import com.atomikos.transactionalremoting.client.TransactionalHttpInvokerRequestExecutor;
+import account.AccountService;
+
+import com.atomikos.http.spring.httpinvoker.TransactionalHttpInvokerRequestExecutor;
 
 @SpringBootApplication
 public class DemoClientApplication {
@@ -28,9 +29,17 @@ public class DemoClientApplication {
 	
 	@Bean
 	public CommandLineRunner demo(CustomerService customerService) {
-		return (args) -> {
-			customerService.createUserAndAccount();
-		};	
+		
+		return new CommandLineRunner() {
+			
+			@Override
+			public void run(String... args) throws Exception {
+				customerService.createUserAndAccount();
+				
+			}
+		}; 
+		
+			
 	}
  	
 

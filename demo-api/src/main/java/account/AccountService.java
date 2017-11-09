@@ -1,4 +1,4 @@
-package com.atomikos.demotransactionalremoting.api;
+package account;
 
 import java.util.Collection;
 

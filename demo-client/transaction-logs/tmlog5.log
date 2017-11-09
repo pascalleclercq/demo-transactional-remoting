@@ -1,0 +1,2 @@
+{"id":"6f57f36b-bc03-4267-8981-8012bd973b2e","wasCommitted":true,"participants":[{"uri":"127.0.0.1.tm1","state":"COMMITTING","expires":1510225037713,"resourceName":"dataSource"},{"uri":"http://localhost:8081/atomikos","state":"COMMITTING","expires":1510225037713}]}
+{"id":"6f57f36b-bc03-4267-8981-8012bd973b2e","wasCommitted":true,"participants":[{"uri":"127.0.0.1.tm1","state":"TERMINATED","expires":1510225037722,"resourceName":"dataSource"},{"uri":"http://localhost:8081/atomikos","state":"TERMINATED","expires":1510225037722}]}

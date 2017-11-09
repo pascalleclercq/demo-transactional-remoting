@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.atomikos.demotransactionalremoting.api.Account;
-import com.atomikos.demotransactionalremoting.api.AccountService;
+import account.Account;
+import account.AccountService;
 
 @Service
 @Transactional
