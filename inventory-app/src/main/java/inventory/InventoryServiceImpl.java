@@ -12,7 +12,7 @@ public class InventoryServiceImpl implements InventoryService {
 	@Autowired
 	StockRepository repository;
 	
-	public void update(String itemId, int qty, String cardno) throws Exception {
+	public void update(String itemId, int qty) throws Exception {
 		repository.save(new Stock(itemId, qty)); 
 	}
 }
