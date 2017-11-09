@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import account.Account;
-import account.AccountService;
+import payment.Payment;
+import payment.PaymentService;
 
 @Service
 @Transactional
@@ -15,10 +15,10 @@ public class CustomerService {
 	@Autowired
 	CustomerRepository repository;
 	@Autowired
-	AccountService accountService;
+	PaymentService accountService;
 	
-	public void createUserAndAccount() {
+	public void createUserAndAccount() throws Exception {
 		repository.save(new Customer("Jack", "Bauer"));
-		accountService.save(new Account("Jack Bauer", 50f)); //remote service
+		accountService.pay(new Payment("Jack Bauer", 50)); //remote service
 	}
 }

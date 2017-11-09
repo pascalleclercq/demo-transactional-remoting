@@ -1,4 +1,4 @@
-package com.atomikos.demotransactionalremoting;
+package payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -6,25 +6,26 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 
-import account.AccountService;
+import payment.PaymentService;
 
 import com.atomikos.http.spring.httpinvoker.AtomikosHttpPort;
+import com.atomikos.http.spring.httpinvoker.AtomikosTransactionPort;
 import com.atomikos.http.spring.httpinvoker.TransactionalHttpInvokerServiceExporter;
 
 @SpringBootApplication
-public class DemoTransactionalRemotingApplication {
+public class PaymentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoTransactionalRemotingApplication.class, args);
+		SpringApplication.run(PaymentApplication.class, args);
 	}
 	
 	@Autowired
-	AccountService accountService;
+	PaymentService paymentService;
 	@Bean(name = "/account") 
 	HttpInvokerServiceExporter accountServiceServiceExporter() {
         HttpInvokerServiceExporter exporter = new TransactionalHttpInvokerServiceExporter();
-        exporter.setService( accountService );
-        exporter.setServiceInterface( AccountService.class );
+        exporter.setService( paymentService );
+        exporter.setServiceInterface( PaymentService.class );
         return exporter;
     }
 	

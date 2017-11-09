@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 
-import account.AccountService;
+import payment.PaymentService;
 
 import com.atomikos.http.spring.httpinvoker.TransactionalHttpInvokerRequestExecutor;
 
@@ -18,13 +18,13 @@ public class DemoClientApplication {
 	}
 	
 	@Bean
-	public AccountService accountService() {
+	public PaymentService accountService() {
 		HttpInvokerProxyFactoryBean invoker = new HttpInvokerProxyFactoryBean();
 		invoker.setServiceUrl("http://localhost:8081/account");
-		invoker.setServiceInterface(AccountService.class);
+		invoker.setServiceInterface(PaymentService.class);
 		invoker.setHttpInvokerRequestExecutor(new TransactionalHttpInvokerRequestExecutor());
 		invoker.afterPropertiesSet();
-		return (AccountService)invoker.getObject();
+		return (PaymentService)invoker.getObject();
 	}
 	
 	@Bean
